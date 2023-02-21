@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game03</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <main>
+        <span class="settings">
+            <label for="check">
+                <i class='bx bx-cog' ></i>
+            </label>
+        </span>
+        <input type="checkbox" id="check">
+        <div class="box">
+            <h1>Settings</h1>
+            <div class="cof">
+                <span>dark theme</span>
+                <div>
+                    <label class="switch">
+                        <input type="checkbox" id="dark">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="cof">
+                <span>Ativar Pontuação Geral</span>
+                <div>
+                    <label class="switch">
+                        <input type="checkbox" id="save">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="cof">
+                <span>Resetar Configurações</span>
+                <div>
+                    <input type="button" value="Apagar" id="btn" class="btn">
+                </div>
+            </div>
+        </div>
+        </div>
+        <div>
+            <div class="ponts">
+                <span id="pontos">0</span>
+                <span id="erros">0</span>
+            </div>
+            <div class="word_area">
+                <h1 id="word">Welcome</h1>
+                <h1 id="pre"></h1>
+            </div>
+            <div class="input_area">
+                <input type="text" id="userword" placeholder="digite aqui !">
+            </div>
+        </div>
+    </main>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
