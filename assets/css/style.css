@@ -196,3 +196,60 @@ main > div{
     padding: 3px 10px;
     box-sizing: border-box;
 }
+.alerts{
+    position: absolute;
+    z-index: 33;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    top: 90px;
+    right: 20px;
+    max-height: 500px;
+    overflow-y: scroll;
+    scroll-snap-align: start;
+}
+.alerts::-webkit-scrollbar{
+    display: none;
+}
+.alert{
+    flex: none;
+    background-color: #252525c5;
+    width: 350px;
+    height: 200px;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all .6s ease;
+    cursor: pointer;
+}
+.show_alert{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+.alert h1 {
+    text-transform: capitalize;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.alert p{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+@media (max-width:730px) {
+    .box{
+        width: 97%;
+    }
+    .alerts{
+        right: 0px;
+    }
+}
+@media (max-width:360px) {
+    .alert{
+        width: 100%;
+    }
+}
