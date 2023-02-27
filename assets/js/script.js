@@ -180,6 +180,20 @@ word.addEventListener("click", ()=>{
     var url = 'https://www.google.com/search?q='+word.innerHTML
     window.open(url, '_blank');
 })
-
-
-  
+function n(){
+    var palavrasExistentes = 600000
+    var array = localStorage.getItem('norepeat')
+    array = array.split(',');
+    if (array == ""){
+        var tiradas = array.length - 1
+        var resultado = parseInt(palavrasExistentes) - parseInt(tiradas)
+        var html = document.querySelector('.feitas')
+        return(tiradas+' de '+ resultado)
+    }else{
+        var tiradas = array.length
+        var resultado = parseInt(palavrasExistentes) - parseInt(tiradas)
+        var html = document.querySelector('.feitas')
+        return(tiradas+' de '+ resultado)
+    }
+}
+n()
