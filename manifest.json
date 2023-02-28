@@ -7,7 +7,7 @@
   "orientation": "any",
   "scope": "/",
   "short_name": "ericknovaes56.github",
-  "start_url": "index.html",
+  "start_url": "./index.html",
   "theme_color": "#000000",
   "categories": [
     "games"
