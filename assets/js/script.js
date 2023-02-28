@@ -352,3 +352,32 @@ seach.addEventListener('input', () => {
 
     }
 });
+// Armazena a instância da API beforeinstallprompt
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(registration => {
+          console.log('Service worker registrado com sucesso:', registration.scope);
+        })
+        .catch(error => {
+          console.log('Falha ao registrar o service worker:', error);
+        });
+    });
+  }
+let deferredPrompt;
+
+// Verifica se o navegador suporta a criação de atalhos
+if ('BeforeInstallPromptEvent' in window) {
+  // Escuta o evento beforeinstallprompt para receber a instância da API
+  window.addEventListener('beforeinstallprompt', (event) => {
+    // Armazena a instância da API para uso posterior
+    deferredPrompt = event;
+
+    // Exibe o alerta de confirmação
+    if (window.confirm('Deseja criar um atalho para o aplicativo na tela inicial ou na área de trabalho?')) {
+      // Chama o método prompt() da API para criar o atalho
+      deferredPrompt.prompt();
+    }
+  });
+}

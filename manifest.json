@@ -12,13 +12,10 @@
   "categories": [
     "games"
   ],
-  "screenshots": [],
   "icons": [
     {
       "src": "./1451303.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "type": "image/png"
     }
-  ],
-  "shortcuts": []
+  ]
 }
