@@ -14,15 +14,9 @@
     <link rel="shortcut icon" href="./1451303.png" type="image/x-icon">
 </head>
 <body>
-    <div class="alerts">
-
-    </div>
+    <div class="alerts"></div>
+    <div class="procurando"></div>
     <main>
-        <span class="settings">
-            <label for="check">
-                <i class='bx bx-cog' ></i>
-            </label>
-        </span>
         <input type="checkbox" id="check">
         <div class="box">
             <h1>Settings</h1>
@@ -44,6 +38,27 @@
                     </label>
                 </div>
             </div>
+            <div class="cof cofupgrade">
+                <input type="checkbox" id="rangelimit">
+                <div class="contentup">
+                    <div class="uptop">
+                        <span>limite de caracteres</span>
+                        <div>
+                            <label for="rangelimit">
+                                <span class="btn green" id="activerange">
+                                    Ativar
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="btun">
+                        <div>
+                            <input type="range" id="range" min="5" max="15">
+                            <span id="show">5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="cof">
                 <span>Resetar Configurações</span>
                 <div>
@@ -58,11 +73,40 @@
                 <span id="erros">0</span>
             </div>
             <div class="word_area">
-                <h1 id="word"></h1>
+                <h1 id="word">
+                    <i class='bx bx-loader-alt bx-spin' ></i>
+                </h1>
                 <h1 id="pre"></h1>
             </div>
             <div class="input_area">
+                <div class="hoistorico">
+                    <label for="boxhis">
+                        <i class='bx bx-history'></i>
+                    </label>
+                    <input type="checkbox" id="boxhis">
+                    <input type="checkbox" id="maximo">
+                    <div class="boxhis">
+                        <div class="tophis">
+                            <label for="maximo" id="max">
+                                <i class='bx bx-fullscreen'></i>
+                            </label>
+                            <h1>Histórico  !</h1>
+                            <p>Você pode ver todo o histórico de palavras digitadas corretamente desde a abertura da página.</p>
+                        </div>
+                        <div class="bhis">
+                            <span id="count">
+                                #VocÊ digitou 0 palavras
+                            </span>
+                            <div class="iwords"></div>
+                        </div>
+                    </div>
+                </div>
                 <input type="text" id="userword" placeholder="digite aqui !">
+                <span class="settings">
+                    <label for="check">
+                        <i class='bx bx-cog' ></i>
+                    </label>
+                </span>
             </div>
         </div>
     </main>

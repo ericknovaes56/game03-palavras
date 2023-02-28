@@ -1,14 +1,60 @@
 const body = document.querySelector('.alerts')
-
+if (!localStorage.getItem('range')){
+    localStorage.setItem("range", 'false')
+}
+var activerange = document.getElementById("activerange")
+if (localStorage.getItem('range') == 'true'){
+    document.getElementById("rangelimit").click()
+    activerange.style.border= '1px solid #21f33d'
+    activerange.style.color= '#21f33d'
+    activerange.innerHTML='Ativado'
+    msg('Range Ativado', 'O raige ta ativado por padrão ao atualizar a pagina seu valor é 5 !',8000, '#04EC07')
+}
 if (!localStorage.getItem('bemvindo')){
     localStorage.setItem('bemvindo','true')
-    msg('Boas-vindas', 'Para jogar, basta digitar no campo abaixo.', 8000)
+    msg('Boas-vindas', 'Para jogar, basta digitar no campo abaixo.', 16000)
 }
 var word = document.getElementById("word")
+
+
 var backp = 0
 var palavra = ''
 var erros = 0
 var pontos = 0
+var range = 5
+var valor33 =  document.getElementById("range")
+valor33.value = range
+valor33.addEventListener("input", ()=>{
+    if (localStorage.getItem('range') == 'true'){
+        range = valor33.value
+        console.log(range)
+        document.getElementById("show").innerHTML=range
+    }else{
+        window.location.href='index.html'
+    }
+})
+activerange.addEventListener("click", ()=>{
+    if (localStorage.getItem('range') == 'false'){
+        msg('Range Ativado', 'O raige ta ativado por padrão ao atualizar a pagina seu valor é 5 !',8000, '#04EC07')
+        activerange.style.border= '1px solid #21f33d'
+        activerange.style.color= '#21f33d'
+        activerange.innerHTML='Ativado'
+        localStorage.setItem("range", 'true')
+
+       var valor =  document.getElementById("range")
+       valor.addEventListener("input", ()=>{
+        document.getElementById("show").innerHTML=range
+        range = valor.value
+        console.log(range)
+       })
+    }else{
+        localStorage.setItem("range", 'false')
+        activerange.style.border= ''
+        activerange.style.color= ''
+        activerange.innerHTML='Ativar'
+    }
+})
+
 if (!localStorage.getItem('norepeat')){
     localStorage.setItem('norepeat', "")
 }
@@ -29,13 +75,52 @@ function norepeatf(value){
     if (array.includes(value)){
         generator()
     }else{
-        palavra = value
-        palavra = palavra.toLowerCase()
-        palavra = palavra.replace(/-/g, ' ')
-        word.innerHTML=palavra
+        if(value.includes('-')){
+            generator()
+        }else{
+            if (localStorage.getItem('range')=='true'){
+                if (range > 4 && range < 16){
+                    if (value.length != range){
+                        generator()
+                        createRange(value)
+                        var box = document.querySelector(".procurando")
+                        var max = box.clientHeight
+                        box.scrollBy(0,max)
+        
+                    }else{
+                        var box = document.querySelectorAll(".procurando span")
+                        np = 0
+                        box.forEach(element => {
+                            element.remove()
+                        });
+                        palavra = value
+                        palavra = palavra.toLowerCase()
+                        word.innerHTML=palavra
+                    }
+                }else{
+                    alert('Opa! seu espertinho sai fora !')
+                    window.location.href='index.html'
+                }
+            }else{
+                palavra = value
+                palavra = palavra.toLowerCase()
+                word.innerHTML=palavra
+                var box = document.querySelectorAll(".procurando span")
+                box.forEach(element => {
+                    element.remove()
+                });
+            }
+        }
     }
 }
-
+var np = 0
+function createRange(range){
+    var box = document.querySelector(".procurando")
+    var span = document.createElement("span")
+    np++
+    span.innerHTML=np+"."+ range
+    box.appendChild(span)
+}
 var user = document.getElementById('userword')
 user.addEventListener("input" , (event)=>{
     var value = user.value
@@ -70,6 +155,8 @@ function vdd(value){
          document.getElementById("pontos").innerHTML=pontos
         setTimeout(() => {
             word.style.color='gray'
+            palavra = "++++++++++++++++++++++++++"
+            word.innerHTML = "<i class='bx bx-loader-alt bx-spin' ></i>"
             generator()
         }, 500);
         var save = document.getElementById("save")
@@ -77,6 +164,7 @@ function vdd(value){
             var soma = parseInt(localStorage.getItem('pontos')) + 1
             localStorage.setItem('pontos', soma)
         }
+        updateHistory()
     }else{
         word.style.color='red'
         msg('Errou !', 'A palavra "' + palavra + '" foi digitada incorretamente !',2000, 'red')
@@ -86,6 +174,8 @@ function vdd(value){
         document.getElementById("erros").innerHTML=erros
         setTimeout(() => {
             word.style.color='gray'
+            palavra = "++++++++++++++++++++++++++"
+            word.innerHTML = "<i class='bx bx-loader-alt bx-spin' ></i>"
             generator()
         }, 500);
     }
@@ -101,7 +191,7 @@ dark.addEventListener("change", ()=>{
     }else{
         localStorage.setItem("color", 'white')
         document.querySelector("body").classList.remove("dark")
-        msg('Tema claro ativado!', 'Este tema pode cansar seus olhos. Recomendamos que você retorne ao tema escuro para uma melhor experiência.')
+        msg('Tema claro ativado!', 'Este tema pode cansar seus olhos. Recomendamos que você retorne ao tema escuro para uma melhor experiência.',8000)
     }
 })
 var memoria = localStorage.getItem('color')
@@ -137,6 +227,7 @@ document.getElementById("btn").addEventListener("click",()=>{
     localStorage.setItem('pontos', 0)
     localStorage.removeItem('bemvindo')
     localStorage.removeItem('norepeat')
+    localStorage.removeItem('range')
     window.location.href='index.html'
     msg('Configurações redefinidas!', 'Você redefiniu todas as configurações, incluindo pontos gerais e tema escolhido.', 8000)
     if (save.checked){
@@ -196,4 +287,26 @@ function n(){
         return(tiradas+' de '+ resultado)
     }
 }
-n()
+
+function updateHistory(){
+    var box = document.querySelector(".iwords")
+    var spans = document.querySelectorAll(".iwords span")
+    spans.forEach(element => {
+        element.remove()
+    });
+    var array = localStorage.getItem('norepeat')
+    array = array.split(',');
+    var count = array.length
+    if(array == ""){
+        array = 0
+        count = 0
+    }else{
+        document.getElementById("count").innerHTML='#VocÊ digitou '+count+' palavras'
+        array.forEach(element => {
+            var span = document.createElement('span')
+            span.innerHTML=element
+            box.insertBefore(span, box.firstChild);
+        });
+    }
+}
+updateHistory()
