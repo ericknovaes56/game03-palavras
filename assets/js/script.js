@@ -117,9 +117,14 @@ var np = 0
 function createRange(range){
     var box = document.querySelector(".procurando")
     var span = document.createElement("span")
+    span.classList.add('procu')
     np++
     span.innerHTML=np+"."+ range
     box.appendChild(span)
+
+    setTimeout(() => {
+        span.classList.add("showrange")
+    }, 1);
 }
 var user = document.getElementById('userword')
 user.addEventListener("input" , (event)=>{
@@ -288,8 +293,8 @@ function n(){
     }
 }
 
+var box = document.querySelector(".iwords")
 function updateHistory(){
-    var box = document.querySelector(".iwords")
     var spans = document.querySelectorAll(".iwords span")
     spans.forEach(element => {
         element.remove()
@@ -305,8 +310,45 @@ function updateHistory(){
         array.forEach(element => {
             var span = document.createElement('span')
             span.innerHTML=element
+            span.addEventListener("click", ()=>{
+                var url = 'https://www.google.com/search?q='+element
+                window.open(url, '_blank');
+            })
             box.insertBefore(span, box.firstChild);
         });
     }
 }
 updateHistory()
+
+var seach = document.getElementById("seach");
+
+seach.addEventListener('input', () => {
+    if (seach.valor != ' '){
+        var spans = document.querySelectorAll(".iwords span")
+        spans.forEach(element => {
+            element.remove()
+        });
+      const regex = new RegExp(seach.value, 'i'); // Cria uma expressão regular a partir do valor de busca, com a opção 'i' para ignorar case
+      let array = localStorage.getItem('norepeat').split(','); // Converte a string do localStorage em um array
+      const resultado = [];
+      array.forEach(element => {
+        if (element.match(regex)) { // Verifica se o elemento corresponde à expressão regular
+          resultado.push(element); // Adiciona o elemento ao array de resultados
+        }
+      });
+      if (resultado != ""){
+        if (resultado.length == array.length){
+            updateHistory()
+            document.getElementById('result').innerHTML = ''
+        }else{
+            document.getElementById('result').innerHTML = resultado.length + ' Resultado com a busca "' + seach.value+'"'
+            resultado.forEach(element => {
+                var span = document.createElement('span')
+                span.innerHTML=element
+                box.insertBefore(span, box.firstChild);
+              });
+        }
+      }
+
+    }
+});

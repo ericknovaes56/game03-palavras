@@ -263,7 +263,7 @@ main > div{
 .procurando::-webkit-scrollbar{
     display: none;
 }
-.procurando span{
+.procu{
     background-color: #252525;
     color: white;
     min-width: 190px;
@@ -274,6 +274,13 @@ main > div{
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border-radius: 999px;
+    opacity: 0;
+    transition: all .3s ease;
+    transform: translateX(-200px);
+}
+.showrange{
+    opacity: 1;
+    transform: translateX(0);
 }
 @media (max-width:730px) {
     .box{
@@ -398,6 +405,8 @@ main > div{
     line-height: 0;
     flex: 1;
     text-transform: capitalize;
+    cursor: pointer;
+    user-select: none;
 }
 #max{
     position: absolute;
@@ -423,4 +432,14 @@ main > div{
     margin: auto;
     top: 0;
     left: 0;
+}
+#seach{
+    height: 50px;
+    border-radius: 999px;
+    border: 3px solid #2D3236;
+    background-color: transparent;
+    color: white;
+    outline: none;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
